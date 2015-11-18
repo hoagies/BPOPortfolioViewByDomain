@@ -1,0 +1,12 @@
+{
+   "name": "BPO Portfolio View by Domain",
+   "className": "CustomApp",
+   "server": "https://rally1.rallydev.com",
+   "sdk": "2.0",
+   "javascript": [
+      "App.js"
+   ],
+   "css": [
+      "app.css"
+   ]
+}
