@@ -33,6 +33,7 @@ Ext.define('CustomApp', {
 		}
 		var panel = new Ext.Panel({
 			id: 'container',
+			// autoScroll: true,
 			// title: 'Initiatives',
 			layout: {
 				type: 'accordion',
@@ -44,7 +45,7 @@ Ext.define('CustomApp', {
 			pack: 'start',
 			// collapsible: true,
 			defaults: {
-				bodyStyle: 'padding:15px'
+				bodyStyle: 'padding:15px;'
 			}
 		});
 		this.add(panel);
@@ -77,6 +78,7 @@ Ext.define('CustomApp', {
 			var title = id + ' - ' + record.get('Name');
 			var rowPanel = new Ext.Panel({
 				title: title,
+				ui: 'initiative',
 				layout: {
 					type: 'vbox',
 					align: 'stretch'
@@ -146,8 +148,6 @@ Ext.define('CustomApp', {
 						align: 'stretch'
 					},
 					height: 175,
-					frame	: true,
-					align	: 'stretch',
 					items	: that._getItems2(record,id)
 				}
 			);
@@ -164,7 +164,6 @@ Ext.define('CustomApp', {
 				{
 					title	: record,
 					flex	: 2,
-					border	: true,
 					autoScroll: true,
 					items	: [
 						{

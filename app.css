@@ -3,9 +3,24 @@
 }
 
 .x-panel-empty{
-    /*border: 1px solid red;*/
+    border: 1px solid red;
+	background-color: #FCFCFC;
+	/*border: 1px solid #D8D8D8;*/
+}
+
+.x-panel-empty{
 	background-color: #FCFCFC;
 	border: 1px solid #D8D8D8;
+}
+
+.x-panel-initiative{
+	background-color: #F2F2F2;
+}
+
+.x-panel-header-initiative:hover {
+	background-color: #d0ddf2;
+	cursor: pointer;
+	cursor: hand;
 }
 
 .x-panel-header-horizontal{
