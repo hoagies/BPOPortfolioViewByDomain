@@ -1,8 +1,13 @@
+Ext.define('App.Constants', {
+	singleton: true,
+	GRID_COLUMNS: 4
+ });
+
 Ext.define('CustomApp', {
     extend: 'Rally.app.App',
     componentCls: 'app',
 	title: 'BPO Portfolio View by Domain',
-	requires: ['Constants'],
+	requires: ['App.Constants'],
 	launch: function() {
 
 		this.add({
@@ -106,7 +111,7 @@ Ext.define('CustomApp', {
 			uniqueProjectNames = _.uniq(projectNames);
 		
 		// Set number of columns (grids) per row
-		var columns = Constants.GRID_COLUMNS;
+		var columns = App.Constants.GRID_COLUMNS;
 		var splitDomains = this._splitArray(uniqueProjectNames,columns);
 
 		var id = initiative.get('FormattedID');
@@ -196,7 +201,7 @@ Ext.define('CustomApp', {
 		});
 		// Create Empty Boxes
 		var i = records.length;
-		while (i < Constants.GRID_COLUMNS){
+		while (i < App.Constants.GRID_COLUMNS){
 			gridPanels.push(
 				{
 					flex	: 2,
