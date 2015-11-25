@@ -48,11 +48,12 @@ Ext.define('CustomApp', {
 			}
 		});
 		this.add(panel);
+		panel.doLayout();
 		
 		var initiativeStore = Ext.create('Rally.data.WsapiDataStore', {
 			model: 'PortfolioItem/Initiative',
 			pageSize: 200,
-			limit: 10000,
+			limit: Infinity,
 			autoLoad: true,
 			filters: [this._getOwnerFilter()],
 			listeners: {
@@ -83,12 +84,12 @@ Ext.define('CustomApp', {
 			});
 
 			containerPanel.add(rowPanel);
-			// containerPanel.doLayout();
+			containerPanel.doLayout();
 
 			var featureStore = Ext.create('Rally.data.WsapiDataStore', {
 				model: 'PortfolioItem/Feature',
 				pageSize: 200,
-				limit: 10000,
+				limit: Infinity,
 				autoLoad: true,
 				filters: [
 					{
@@ -123,6 +124,7 @@ Ext.define('CustomApp', {
 		var id = initiative.get('FormattedID');
 		var items = this._getItems(splitDomains,id);
 		rowPanel.add(items);
+		rowPanel.doLayout();
 	},
 	
 	_splitArray: function (unsplitArray, size) {
@@ -185,7 +187,7 @@ Ext.define('CustomApp', {
 							// showPagingToolbar: false,
 							storeConfig: {
 								model: 'portfolioitem/feature',
-								pageSize: 500,
+								pageSize: 200,
 								filters: [that._getFilterGrid(record,id)]
 							}
 						}
@@ -198,6 +200,7 @@ Ext.define('CustomApp', {
 		while (i < App.Constants.GRID_COLUMNS){
 			gridPanels.push(
 				{
+					ui: 'empty',
 					flex	: 2,
 					border	: true
 				}
