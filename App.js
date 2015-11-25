@@ -1,7 +1,7 @@
 Ext.define('App.Constants', {
 	singleton: true,
 	GRID_COLUMNS: 4
- });
+});
 
 Ext.define('CustomApp', {
     extend: 'Rally.app.App',
@@ -55,16 +55,6 @@ Ext.define('CustomApp', {
 			limit: 10000,
 			autoLoad: true,
 			filters: [this._getOwnerFilter()],
-			// sorters: [
-				// {
-					// property: 'FormattedID',
-					// direction: 'ASC'
-				// }
-			// ],
-			// remoteSort: false,
-			// fetch: [
-				// 'FormattedID','Name','Owner'
-			// ],
 			listeners: {
 				load: function(store, data) {
 					this._onInitiativesLoaded(store, data);
@@ -77,10 +67,24 @@ Ext.define('CustomApp', {
 	_onInitiativesLoaded: function(store, data){
 		
 		var that = this;
+		var containerPanel = that.down('#container');
 
 		// Loop through each Initiative
 		Ext.Array.each(data, function(record) {
+			// Create Initiative Row Panel
 			var id = record.get('FormattedID');
+			var title = id + ' - ' + record.get('Name');
+			var rowPanel = new Ext.Panel({
+				title: title,
+				layout: {
+					type: 'vbox',
+					align: 'stretch'
+				}
+			});
+
+			containerPanel.add(rowPanel);
+			// containerPanel.doLayout();
+
 			var featureStore = Ext.create('Rally.data.WsapiDataStore', {
 				model: 'PortfolioItem/Feature',
 				pageSize: 200,
@@ -95,7 +99,7 @@ Ext.define('CustomApp', {
 				],
 				listeners: {
 					load: function(store, data) {
-						that._onFeaturesLoaded(store, record);
+						that._onFeaturesLoaded(store, record, rowPanel);
 					},
 					scope: this
 				}
@@ -103,8 +107,9 @@ Ext.define('CustomApp', {
 		});
 	},
 	
-	_onFeaturesLoaded: function(store, initiative){
+	_onFeaturesLoaded: function(store, initiative, rowPanel){
 		
+		// Get Distinct Projects from Feature Store
 		var projectNames = _.map(store.getRange(), function(record) {
 			return record.get('Project').Name;
 		}),
@@ -114,20 +119,10 @@ Ext.define('CustomApp', {
 		var columns = App.Constants.GRID_COLUMNS;
 		var splitDomains = this._splitArray(uniqueProjectNames,columns);
 
+		// Create Grid Panels for Domain
 		var id = initiative.get('FormattedID');
-		var title = id + ' - ' + initiative.get('Name');
-		var panelChild = new Ext.Panel({
-			title: title,
-			layout: {
-				type: 'vbox',
-				align: 'stretch'
-			},
-			items: this._getItems(splitDomains,id)
-		});
-		
-		var panel = this.down('#container');
-		panel.add(panelChild);
-		panel.doLayout();
+		var items = this._getItems(splitDomains,id);
+		rowPanel.add(items);
 
 	},
 	
