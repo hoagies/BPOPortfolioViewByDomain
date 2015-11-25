@@ -33,7 +33,7 @@ Ext.define('CustomApp', {
 		}
 		var panel = new Ext.Panel({
 			id: 'container',
-			title: 'Initiatives',
+			// title: 'Initiatives',
 			layout: {
 				type: 'accordion',
 				titleCollapse: true,
@@ -42,7 +42,7 @@ Ext.define('CustomApp', {
 				multi: true
 			},
 			pack: 'start',
-			collapsible: true,
+			// collapsible: true,
 			defaults: {
 				bodyStyle: 'padding:15px'
 			}
@@ -123,7 +123,6 @@ Ext.define('CustomApp', {
 		var id = initiative.get('FormattedID');
 		var items = this._getItems(splitDomains,id);
 		rowPanel.add(items);
-
 	},
 	
 	_splitArray: function (unsplitArray, size) {
