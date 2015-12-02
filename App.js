@@ -188,6 +188,21 @@ Ext.define('CustomApp', {
 								model: 'portfolioitem/feature',
 								pageSize: 200,
 								filters: [that._getFilterGrid(record,id)]
+							},
+							// For Tooltip (12/1/2015)
+							listeners: {
+								itemmouseenter: function(g, record, item) {
+									tooltipvalue = record.get('FormattedID') + ' - ' + record.get('Name');
+									Ext.create('Rally.ui.tooltip.ToolTip', {
+										target : item,
+										html: '<p><strong>' + tooltipvalue + '</strong></p>'
+									});
+								},
+								// select: this._getRecordOnSelectedRow,
+								// load : function(g, record, index, options){
+									// this._getRecordOnSelectedRow(g, record, 0, options);
+								// },
+								scope: this
 							}
 						}
 					]
@@ -240,6 +255,11 @@ Ext.define('CustomApp', {
 			operator: '=',
 			value: comboval
 		};
-	}
+	},
+
+	// SPH Test This (12/1/2015)
+	_getRecordOnSelectedRow:function(g, record, rowIndex, options){
+        console.log(record);
+    }
 	
 });
