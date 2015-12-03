@@ -204,14 +204,16 @@ Ext.define('CustomApp', {
 									tooltipvalue = record.get('FormattedID') + ' - ' + record.get('Name');
 									Ext.create('Rally.ui.tooltip.ToolTip', {
 										target : item,
+										destroyAfterHide: true,
+										hideDelay: 0,
 										html: '<p><strong>' + tooltipvalue + '</strong></p>'
-									});
-								},
+									}).showNow();
+								}
 								// select: this._getRecordOnSelectedRow,
 								// load : function(g, record, index, options){
 									// this._getRecordOnSelectedRow(g, record, 0, options);
 								// },
-								scope: this
+								// scope: this
 							}
 						}
 					]
