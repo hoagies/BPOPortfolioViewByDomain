@@ -200,12 +200,12 @@ Ext.define('CustomApp', {
 							},
 							// For Tooltip (12/1/2015)
 							listeners: {
-								itemmouseenter: function(g, record, item) {
+								itemclick: function(g, record, item) {
 									tooltipvalue = record.get('FormattedID') + ' - ' + record.get('Name');
 									Ext.create('Rally.ui.tooltip.ToolTip', {
 										target : item,
 										destroyAfterHide: true,
-										hideDelay: 0,
+										// hideDelay: 0,
 										html: '<p><strong>' + tooltipvalue + '</strong></p>'
 									}).showNow();
 								}
